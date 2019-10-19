@@ -15,6 +15,10 @@ const todosTable = process.env.TODOS_TABLE;
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   console.log('Processing event: ', event);
+  // let attachmentUrl = ``
+  // if (event.queryStringParameters){
+  //   attachmentUrl = event.queryStringParameters.attachmentUrl;
+  // }
   const userId = getUserId(event);
   const newTodo: CreateTodoRequest = JSON.parse(event.body);
   const todoId = uuid.v4();
@@ -25,7 +29,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     createdAt,
     ...newTodo,
     done: false,
-    attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
+    attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}.png`
   }
 
   await docClient.put({
@@ -39,6 +43,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: ''
+    body: JSON.stringify(todoItem)
   }
 }

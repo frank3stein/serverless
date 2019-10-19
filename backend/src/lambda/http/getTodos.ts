@@ -12,24 +12,27 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
 
   const result = await docClient.query({
     TableName: todosTable,
-    KeyConditionExpression: 'userId = :userId',
+    KeyConditionExpression: '#userId = :userId',
     ExpressionAttributeValues: {
-      'userId': userId
+      ':userId': userId
+    },
+    ExpressionAttributeNames:{
+      '#userId':'userId' // To make sure there are no conflicts with reserved words
     }
   }).promise();
 
   const todos = result.Items;
-
-  if(result.Count === 0) {
-    return {
-      statusCode: 404,
-      headers:{
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
-      },
-      body: 'The todos are empty'
-    }
-  }
+  // If you return error for no todos, the spinner stays active.
+  // if(result.Count === 0) {
+  //   return {
+  //     statusCode: 404,
+  //     headers:{
+  //       'Access-Control-Allow-Origin': '*',
+  //       'Access-Control-Allow-Credentials': true
+  //     },
+  //     body: 'The todos are empty'
+  //   }
+  // }
   return {
     statusCode: 200,
     headers:{

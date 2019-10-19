@@ -37,6 +37,8 @@ onx/058Sz3yUn9jqLAdqIBM63jXNLfAZiPNMJD0Zh2HZamMuMz2PJ6JIi6mdbUN2
 kgvo4I0jRnYFtBhidQw80WI=
 -----END CERTIFICATE-----`
 
+// const bucketName = process.env.IMAGES_S3_BUCKET;
+
 export const handler = async (
   event: CustomAuthorizerEvent
 ): Promise<CustomAuthorizerResult> => {
@@ -54,7 +56,12 @@ export const handler = async (
             Action: 'execute-api:Invoke',
             Effect: 'Allow',
             Resource: '*'
-          }
+          },
+          // {
+          //   Action: 's3:GetObject',
+          //   Effect: 'Allow',
+          //   Resource: `arn:aws:s3:::${bucketName}/*`
+          // }
         ]
       }
     }
