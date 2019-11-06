@@ -1,0 +1,85 @@
+import * as AWS from 'aws-sdk';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import { TodoItem } from '../../models/TodoItem';
+import {TodoUpdate} from '../../models/TodoUpdate';
+
+export class TodoAccess {
+    constructor(
+        private readonly docClient: DocumentClient = new AWS.DynamoDB.DocumentClient(),
+        private readonly todosTable = process.env.TODOS_TABLE,
+        private readonly s3 = new AWS.S3()){
+
+        }
+    async getAllTodos(userId:string): Promise<TodoItem[]>{
+        console.log('Getting all Todos');
+        
+        const result = await this.docClient.query({
+            TableName: this.todosTable,
+            KeyConditionExpression: '#userId = :userId',
+            ExpressionAttributeValues: {
+              ':userId': userId
+            },
+            ExpressionAttributeNames:{
+              '#userId':'userId' // Best Practice: to make sure there are no conflicts with reserved words
+            }
+          }).promise();
+
+          const items = result.Items;
+          return items as TodoItem[];
+    }
+    
+    async createTodo(todoItem:TodoItem): Promise<TodoItem> {
+        console.log(`Create a todo with id ${todoItem.todoId}`);
+        await this.docClient.put({
+            TableName: this.todosTable,
+            Item: todoItem
+          }).promise();
+        return todoItem;
+    }
+    async deleteTodo({userId, todoId}, params):Promise<void> {
+        this.s3.getObject(params, (err, _)=>{
+            if(err){
+              console.log(err)
+            }
+            this.s3.deleteObject(params, (err, data)=>{
+              if (err) console.log(err, err.stack);
+              console.log(data);
+            })
+          })
+        
+          
+          await this.docClient.delete({
+            TableName: this.todosTable,
+            Key: {
+              userId,
+              todoId
+            }
+          }).promise()
+    }
+    async updateTodo({userId, todoId, updatedTodo}:{userId:string; todoId:string; updatedTodo:TodoUpdate;}){
+        await this.docClient.update({
+            TableName: this.todosTable,
+            Key: {
+              userId,
+              todoId
+            },
+            ConditionExpression:`userId = :userId and todoId = :todoId`,
+            UpdateExpression: 'set #name = :n, #dueDate = :due, #done = :d',
+            ExpressionAttributeNames:{
+              '#name':'name',
+              '#dueDate': 'dueDate',
+              '#done':'done'
+            },
+            ExpressionAttributeValues:{
+              ':n': updatedTodo.name,
+              ':due': updatedTodo.dueDate,
+              ':d':updatedTodo.done,
+              ':todoId':todoId,
+              ':userId':userId
+            }
+          }).promise();
+
+    }
+}
+
+export default (() => (new TodoAccess()))(); // Exporting the initiated constructor.
