@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
 import { getUserId } from '../utils'
-import TodoAccess from '../dataLayer/todoAccess';
+import {deleteTodo} from '../businessLogic/logic';
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { todoId } = event.pathParameters;
@@ -11,7 +11,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     Bucket: process.env.IMAGES_S3_BUCKET,
     Key: todoId+'.png' 
   }
-  TodoAccess.deleteTodo({userId, todoId}, params)
+  deleteTodo({userId, todoId}, params)
   
   return {
     statusCode: 200,

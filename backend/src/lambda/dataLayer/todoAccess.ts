@@ -7,9 +7,10 @@ export class TodoAccess {
     constructor(
         private readonly docClient: DocumentClient = new AWS.DynamoDB.DocumentClient(),
         private readonly todosTable = process.env.TODOS_TABLE,
-        private readonly s3 = new AWS.S3()){
-
-        }
+        private readonly s3 = new AWS.S3(),
+        private readonly bucketName = process.env.IMAGES_S3_BUCKET,
+        private readonly urlExpiration = process.env.SIGNED_URL_EXPIRATION
+    ){}
     async getAllTodos(userId:string): Promise<TodoItem[]>{
         console.log('Getting all Todos');
         
@@ -36,7 +37,7 @@ export class TodoAccess {
           }).promise();
         return todoItem;
     }
-    async deleteTodo({userId, todoId}, params):Promise<void> {
+    async deleteTodo({userId, todoId}:{userId:string; todoId:string;}, params):Promise<void> {
         this.s3.getObject(params, (err, _)=>{
             if(err){
               console.log(err)
@@ -80,6 +81,26 @@ export class TodoAccess {
           }).promise();
 
     }
+    async generateUploadUrl(toodId:string):Promise<String>{
+        return this.getUploadUrl(toodId);
+    }
+    private getUploadUrl(todoId: string):Promise<String>{
+        return new Promise((res, rej)=>{
+          this.s3.getSignedUrl('putObject', {
+            Bucket: this.bucketName,
+            Key: todoId+'.png',
+            Expires: Number(this.urlExpiration), // expiration must be a number
+            ContentType:'image/png'
+          }, (err, signedUrl)=> {
+            if (err) {
+              console.log('getSignedUrl failed ', err)
+              rej(err);
+            }
+            res(signedUrl);
+            return signedUrl;
+          })
+        });
+      }
 }
 
-export default (() => (new TodoAccess()))(); // Exporting the initiated constructor.
+// export default (() => (new TodoAccess()))(); // Exporting the initiated constructor.

@@ -5,7 +5,7 @@ import * as uuid from 'uuid';
 import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 import { TodoItem } from '../../models/TodoItem';
 import { getUserId } from '../utils';
-import TodoAccess from '../dataLayer/todoAccess';
+import {createTodo} from '../businessLogic/logic';
 const bucketName = process.env.IMAGES_S3_BUCKET;
 
 
@@ -24,13 +24,13 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}.png`
   }
 
-  await TodoAccess.createTodo(todoItem);
+  const todoDB = await createTodo(todoItem);
   return {
     statusCode: 200,
     headers:{
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: JSON.stringify(todoItem)
+    body: JSON.stringify(todoDB)
   }
 }
