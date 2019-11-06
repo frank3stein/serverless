@@ -21,3 +21,11 @@ The user can also add image to each todo. To grant access to S3 upload I have us
 - DeleteTodo - Deletes the todo item in the DynamoDB databse.
 - GenerateUploadUrl - Generates a presigned url for user to upload to s3 bucket destination. This function has the privildge to upload to s3, so it can grant that priviledge to the user for a limited time.
 
+## Run the project locally
+Run `git clone https://github.com/frank3stein/serverless.git`
+Then npm start at /client
+It will start running at port 3000. 
+
+If you can not login make sure that in
+`client/src/config.ts`
+authConfig.callbackUrl points to `http://localhost:3000/callback`.
