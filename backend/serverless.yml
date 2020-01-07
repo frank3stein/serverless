@@ -98,19 +98,13 @@ functions:
         Action:
           - dynamodb:Query
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-      # - Effect: Allow
-      #   Action:
-      #     - dynamodb:Query
-      #   Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/${self:provider.environment.INDEX_TODO}
 
-  # TODO: Configure this function
   CreateTodo:
     handler: src/lambda/http/createTodo.handler
     events:
       - http:
           method: post
           path: todos
-          # added
           cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true
@@ -119,14 +113,13 @@ functions:
         Action:
           - dynamodb:PutItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-  # TODO: Configure this function
+
   UpdateTodo:
     handler: src/lambda/http/updateTodo.handler
     events:
       - http:
           method: patch
           path: todos/{todoId}
-          # added
           cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true
@@ -136,14 +129,13 @@ functions:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-  # TODO: Configure this function
+
   DeleteTodo:
     handler: src/lambda/http/deleteTodo.handler
     events:
       - http:
           method: delete
           path: todos/{todoId}
-          # added
           cors: true
           authorizer: Auth
     iamRoleStatementsInherit: true
@@ -157,7 +149,7 @@ functions:
           - s3:GetObject
           - s3:DeleteObject
         Resource: arn:aws:s3:::{self:provider.environment.IMAGES_S3_BUCKET}
-  # TODO: Configure this function
+
   GenerateUploadUrl:
     handler: src/lambda/http/generateUploadUrl.handler
     events:
@@ -190,19 +182,13 @@ resources:
         ResponseType: DEFAULT_4XX
         RestApiId:
           Ref: "ApiGatewayRestApi"
-    # TODO: Add any necessary AWS resources
+
     TodosTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: S
-          # - AttributeName: createdAt
-          #   AttributeType: S
-          # - AttributeName: attachmentUrl #indexKey
-          #   AttributeType: S
-          # - AttributeName: dueDate
-          #   AttributeType: S
           - AttributeName: todoId
             AttributeType: S
         KeySchema:
@@ -212,72 +198,3 @@ resources:
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.TODOS_TABLE}
-        # LocalSecondaryIndexes:
-        #   - IndexName: ${self:provider.environment.INDEX_TODO}
-        #     KeySchema:
-        #       - AttributeName: userId #partitionKey
-        #         KeyType: HASH
-        #       - AttributeName: todoId #indexKey
-        #         KeyType: RANGE
-        #     Projection:
-        #       # NonKeyAttributes: ["todoId"]
-        #       ProjectionType: ALL
-    # ConnectionsTable:
-    #   Type: AWS::DynamoDB::Table
-    #   Properties:
-    #     AttributeDefinitions:
-    #       - AttributeName: id #partitionKey
-    #         AttributeType: S
-    #       - AttributeName: timestamp
-    #         AttributeType: S
-    #     KeySchema:
-    #       - AttributeName: id
-    #         KeyType: HASH
-    #       - AttributeName: timestamp
-    #         KeyType: RANGE
-    #     BillingMode: PAY_PER_REQUEST
-    #     TableName: ${self:provider.environment.CONNECTIONS_TABLE}
-    # ImagesBucket:
-    #   Type: AWS::S3::Bucket
-    #   Properties:
-    #     AccessControl: PublicRead
-    #     BucketName: ${self:provider.environment.IMAGES_S3_BUCKET}
-    #     # NotificationConfiguration:
-    #     #   LambdaConfigurations:
-    #     #     - Event: s3:ObjectCreated:*
-    #     #       Functions: !GetAtt SendUploadNotificationsLambdaFunction.Arn
-    #     CorsConfiguration:
-    #       CorsRules:
-    #         - AllowedOrigins:
-    #             - "*"
-    #           AllowedHeaders:
-    #             - "*"
-    #           AllowedMethods:
-    #             - GET
-    #               PUT
-    #               POST
-    #               DELETE
-    #               HEAD
-    #           MaxAge: 3000
-    # BucketPolicy:
-    #   Type: AWS::S3::BucketPolicy
-    #   Properties:
-    #     PolicyDocument:
-    #       Id: MyPolicy
-    #       Version: "2012-10-17"
-    #       Statement:
-    #         - Sid: PublicReadForGetBucketObjects
-    #           Effect: Allow
-    #           Principal: "*"
-    #           Action: "s3:GetObject"
-    #           Resource: "arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*"
-    #     Bucket:
-    #       Ref: ImagesBucket
-    # SendUploadNotificationsPermission:
-    #   Type: AWS::Lambda::Permission
-    #   Properties:
-    #     FunctionName: SendUploadNotifications
-    #     Principal: s3.amazonaws.com
-    #     Action: lambda:InvokeFunction
-    #     SourceAccount: !Ref AWS::AccountId
-    #     SourceArn: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}
