@@ -4,19 +4,34 @@ service:
 plugins:
   - serverless-webpack
   - serverless-iam-roles-per-function
+  - serverless-plugin-canary-deployments
+  - serverless-plugin-warmup
+  - serverless-offline
   # - serverless-reqvalidator-plugin
   # - serverless-aws-documentation
 
+package:
+  individually: true
+
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
 
+  tracing:
+    lambda: true
+    apiGateway: true
+
   # deploymentBucket:
   #   name: com.serverless.${self:provider.region}.deploys
-
+  warmup:
+    enabled: true # enable for all functions
+    name: "warmup"
+    payload:
+      isWarmup: true
+    concurrency: 5 # how many instances to keep running
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     IMAGES_TABLE: Images-${self:provider.stage}
@@ -42,6 +57,16 @@ provider:
         - dynamodb:PutItem
         - dynamodb:Query
       Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.IMAGES_TABLE}
+    - Effect: Allow
+      Action:
+        - codedeploy:*
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - "xray:PutTraceSegments"
+        - "xray:PutTelemetryRecords"
+      Resource: "*"
     # - Effect: Allow
     #   Action:
     #     - s3:PutObject
@@ -92,6 +117,11 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+      # - http:
+      #     method: get
+      #     path: todos/{proxy+}
+      #     cors: true
+      #     authorizer: Auth
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
@@ -113,6 +143,9 @@ functions:
         Action:
           - dynamodb:PutItem
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
+    deploymentSettings:
+      type: Linear10PercentEvery1Minute
+      alias: Live
 
   UpdateTodo:
     handler: src/lambda/http/updateTodo.handler

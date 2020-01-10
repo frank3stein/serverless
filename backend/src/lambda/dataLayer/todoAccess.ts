@@ -1,13 +1,17 @@
 import * as AWS from 'aws-sdk';
+import * as AWSXray from 'aws-xray-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { TodoItem } from '../../models/TodoItem';
 import {TodoUpdate} from '../../models/TodoUpdate';
 
+const XAWS = AWSXray.captureAWS(AWS);
+
 export class TodoAccess {
     constructor(
-        private readonly docClient: DocumentClient = new AWS.DynamoDB.DocumentClient(),
+        //@ts-ignore
+        private readonly docClient: DocumentClient = new XAWS.DynamoDB.DocumentClient(),
         private readonly todosTable = process.env.TODOS_TABLE,
-        private readonly s3 = new AWS.S3(),
+        private readonly s3 = new XAWS.S3(),
         private readonly bucketName = process.env.IMAGES_S3_BUCKET,
         private readonly urlExpiration = process.env.SIGNED_URL_EXPIRATION
     ){}
@@ -38,17 +42,17 @@ export class TodoAccess {
         return todoItem;
     }
     async deleteTodo({userId, todoId}:{userId:string; todoId:string;}, params):Promise<void> {
+      try {
+      console.log(params);
         this.s3.getObject(params, (err, _)=>{
             if(err){
               console.log(err)
             }
             this.s3.deleteObject(params, (err, data)=>{
               if (err) console.log(err, err.stack);
-              console.log(data);
+              console.log('Deleting from s3 the picture: ', data);
             })
           })
-        
-          
           await this.docClient.delete({
             TableName: this.todosTable,
             Key: {
@@ -56,6 +60,9 @@ export class TodoAccess {
               todoId
             }
           }).promise()
+        } catch(error){
+          console.log(error);
+        }
     }
     async updateTodo({userId, todoId, updatedTodo}:{userId:string; todoId:string; updatedTodo:TodoUpdate;}){
         await this.docClient.update({

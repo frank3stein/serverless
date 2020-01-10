@@ -21,6 +21,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     createdAt,
     ...newTodo,
     done: false,
+    timestamp: new Date().toISOString(),
     attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}.png`
   }
 

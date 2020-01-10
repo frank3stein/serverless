@@ -11,7 +11,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     Bucket: process.env.IMAGES_S3_BUCKET,
     Key: todoId+'.png' 
   }
-  deleteTodo({userId, todoId}, params)
+  await deleteTodo({userId, todoId}, params)
   
   return {
     statusCode: 200,
@@ -19,6 +19,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true
     },
-    body: ''
+    body: `${todoId} is deleted`
   }
 }
