@@ -44,22 +44,23 @@ export class TodoAccess {
     async deleteTodo({userId, todoId}:{userId:string; todoId:string;}, params):Promise<void> {
       try {
       console.log(params);
+      await this.docClient.delete({
+        TableName: this.todosTable,
+        Key: {
+          userId,
+          todoId
+        }
+      }).promise()
         this.s3.getObject(params, (err, _)=>{
             if(err){
               console.log(err)
+              return;
             }
             this.s3.deleteObject(params, (err, data)=>{
               if (err) console.log(err, err.stack);
               console.log('Deleting from s3 the picture: ', data);
             })
           })
-          await this.docClient.delete({
-            TableName: this.todosTable,
-            Key: {
-              userId,
-              todoId
-            }
-          }).promise()
         } catch(error){
           console.log(error);
         }
@@ -95,7 +96,7 @@ export class TodoAccess {
         return new Promise((res, rej)=>{
           this.s3.getSignedUrl('putObject', {
             Bucket: this.bucketName,
-            Key: todoId+'.png',
+            Key: todoId,
             Expires: Number(this.urlExpiration), // expiration must be a number
             ContentType:'image/png'
           }, (err, signedUrl)=> {

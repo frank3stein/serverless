@@ -7,7 +7,7 @@ plugins:
   - serverless-plugin-canary-deployments
   - serverless-plugin-warmup
   - serverless-offline
-  # - serverless-reqvalidator-plugin
+  # - serverless-reqvalidator-plugin #this is no longer needed https://stackoverflow.com/a/56332035/1671897
   # - serverless-aws-documentation
 
 package:
@@ -67,6 +67,17 @@ provider:
         - "xray:PutTraceSegments"
         - "xray:PutTelemetryRecords"
       Resource: "*"
+    ## Warmup permissions
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - arn:aws:lambda
+              - Ref: AWS::Region
+              - Ref: AWS::AccountId
+              - function:${self:service}-${opt:stage, self:provider.stage}-*
     # - Effect: Allow
     #   Action:
     #     - s3:PutObject
@@ -137,6 +148,9 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          request:
+            schema:
+              application/json: ${file(src/models/create-todo-model.json)}
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
@@ -155,6 +169,9 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          request:
+            schema:
+              application/json: ${file(src/models/update-todo-model.json)}
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow

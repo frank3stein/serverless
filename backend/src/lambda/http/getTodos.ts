@@ -8,6 +8,11 @@ import serverless from'serverless-http';
 const app = express();
 
 app.get('/todos', async(req, res)=>{
+    //@ts-ignore -- source will be added by the warmup plugin
+  if(event.source === 'serverless-plugin-warmup'){
+    //@ts-ignore
+    return 'This function is hot !'
+  }
   console.log('Request log', req);
   const userId = getUserIdExpress(req);
   console.log(userId)

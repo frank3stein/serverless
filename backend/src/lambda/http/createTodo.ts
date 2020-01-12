@@ -10,6 +10,11 @@ const bucketName = process.env.IMAGES_S3_BUCKET;
 
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  //@ts-ignore -- source will be added by the warmup plugin
+  if(event.source === 'serverless-plugin-warmup'){
+    //@ts-ignore
+    return 'This function is hot !'
+  }
   console.log('Processing event: ', event);
   const userId = getUserId(event);
   const newTodo: CreateTodoRequest = JSON.parse(event.body);
@@ -22,7 +27,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     ...newTodo,
     done: false,
     timestamp: new Date().toISOString(),
-    attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}.png`
+    attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
   }
 
   const todoDB = await createTodo(todoItem);
