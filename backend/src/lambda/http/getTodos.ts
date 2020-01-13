@@ -31,6 +31,7 @@ app.get('/todos', async(req, res)=>{
 })
 
 exports.handler = serverless(app);
+
 // I left the implementation without express. I used express getTodos as express-aws learning opportunity and leave out the rest of the functions as they are.
 // export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   // TODO: Get all TODO items for a current user

@@ -37,12 +37,11 @@ provider:
     IMAGES_TABLE: Images-${self:provider.stage}
     # IMAGE_ID_INDEX: ImageIdIndex
     IMAGES_S3_BUCKET: serverless-todo-app-${self:provider.stage}
-    SIGNED_URL_EXPIRATION: 300 # Presigned URL expiration time in seconds
+    SIGNED_URL_EXPIRATION: 300
     INDEX_TODO: Index-todo-${self:provider.stage}
     S3_SIGN_URL_ACCESS: $S3_SIGN_URL_ACCESS
     S3_SIGN_URL_SECRET: $S3_SIGN_URL_SECRET
     # CONNECTIONS_TABLE: Connections-${self:provider.stage}
-    # AUTH0_SECRET: rn30fTpHrpWc24BqK3I3UAELVavmTOVzNkV1Vw9aKIWZEXU97dJ0xIFbCl0wHfPM
 
   iamRoleStatements:
     - Effect: Allow
@@ -119,7 +118,7 @@ functions:
 
   # SendUploadNotifications:
   #   handler: src/lambda/s3/sendNotifications.handler
-  # TODO: Configure this function
+
   GetTodos:
     handler: src/lambda/http/getTodos.handler
     events:
@@ -128,11 +127,6 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
-      # - http:
-      #     method: get
-      #     path: todos/{proxy+}
-      #     cors: true
-      #     authorizer: Auth
     iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: Allow
