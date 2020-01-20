@@ -3,35 +3,14 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "todo",
     "type": "object",
-    "required": ["userId", "todoId", "createdAt", "name", "dueDate", "done", "timestamp"],
+    "required": ["name", "dueDate"],
     "properties": {
-      "userId": {
-        "type": "string"
-      },
-      "todoId": {
-        "type": "string"
-      },
-      "createdAt": {
-        "type": "string"
-      },
       "name": {
         "type": "string"
       },
       "dueDate": {
         "type": "string"
-      },
-      "done": {
-        "type": "boolean"
-      },
-      "timestamp": {
-        "type": "string"
       }
     },
-    "additionalProperties": {
-        "properties":{
-            "attachmentUrl":{
-                "type":"string"
-            }
-        }
-    }
+    "additionalProperties": false
 }
