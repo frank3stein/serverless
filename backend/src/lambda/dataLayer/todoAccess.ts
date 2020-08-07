@@ -14,7 +14,7 @@ export class TodoAccess {
     private readonly s3 = new XAWS.S3(),
     private readonly bucketName = process.env.IMAGES_S3_BUCKET,
     private readonly urlExpiration = process.env.SIGNED_URL_EXPIRATION
-  ) {}
+  ) { }
   async getAllTodos(userId: string): Promise<TodoItem[]> {
     console.log("Getting all Todos");
 
@@ -132,5 +132,3 @@ export class TodoAccess {
     });
   }
 }
-
-// export default (() => (new TodoAccess()))(); // Exporting the initiated constructor.
