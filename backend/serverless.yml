@@ -7,8 +7,6 @@ plugins:
   - serverless-plugin-canary-deployments
   - serverless-plugin-warmup
   - serverless-offline
-  # - serverless-reqvalidator-plugin #this is no longer needed https://stackoverflow.com/a/56332035/1671897
-  # - serverless-aws-documentation
 
 package:
   individually: true
@@ -24,8 +22,6 @@ provider:
     lambda: true
     apiGateway: true
 
-  # deploymentBucket:
-  #   name: com.serverless.${self:provider.region}.deploys
   warmup:
     enabled: true # enable for all functions
     name: "warmup"
@@ -35,13 +31,11 @@ provider:
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     IMAGES_TABLE: Images-${self:provider.stage}
-    # IMAGE_ID_INDEX: ImageIdIndex
     IMAGES_S3_BUCKET: serverless-todo-app-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     INDEX_TODO: Index-todo-${self:provider.stage}
     S3_SIGN_URL_ACCESS: $S3_SIGN_URL_ACCESS
     S3_SIGN_URL_SECRET: $S3_SIGN_URL_SECRET
-    # CONNECTIONS_TABLE: Connections-${self:provider.stage}
 
   iamRoleStatements:
     - Effect: Allow
@@ -77,14 +71,6 @@ provider:
               - Ref: AWS::Region
               - Ref: AWS::AccountId
               - function:${self:service}-${opt:stage, self:provider.stage}-*
-    # - Effect: Allow
-    #   Action:
-    #     - s3:PutObject
-    #     - s3:GetObject
-    #   Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
-
-# custom:
-#   topicName: imagesTopic-${self:provider.stage}
 
 functions:
   Auth:
