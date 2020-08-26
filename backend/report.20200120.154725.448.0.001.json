@@ -1,0 +1,471 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200120.154725.448.0.001.json",
+    "dumpEventTime": "2020-01-20T15:47:25Z",
+    "dumpEventTimeStamp": "1579531645171",
+    "processId": 448,
+    "cwd": "/home/emil/learning/udacity/serverless-project/backend",
+    "commandLine": [
+      "node",
+      "/home/emil/.nvm/versions/node/v13.6.0/bin/sls",
+      "deploy",
+      "-v",
+      "--aws-profile",
+      "udacity-serverless"
+    ],
+    "nodejsVersion": "v13.6.0",
+    "glibcVersionRuntime": "2.27",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "13.6.0",
+      "v8": "7.9.317.25-node.26",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "79",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.1",
+      "openssl": "1.1.1d",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v13.6.0/node-v13.6.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v13.6.0/node-v13.6.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.15.0-74-generic",
+    "osVersion": "#84-Ubuntu SMP Thu Dec 19 08:06:28 UTC 2019",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3401,
+        "user": 732711400,
+        "nice": 500700,
+        "sys": 175033000,
+        "idle": 4754275000,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3404,
+        "user": 735198000,
+        "nice": 537200,
+        "sys": 176489700,
+        "idle": 4745661700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3400,
+        "user": 740014200,
+        "nice": 501700,
+        "sys": 180980200,
+        "idle": 4760443300,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3406,
+        "user": 753392000,
+        "nice": 798700,
+        "sys": 175570400,
+        "idle": 4725717600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3400,
+        "user": 645510400,
+        "nice": 554700,
+        "sys": 282928900,
+        "idle": 4718735000,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3402,
+        "user": 726372300,
+        "nice": 577800,
+        "sys": 173101700,
+        "idle": 4783054100,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3400,
+        "user": 732153600,
+        "nice": 458100,
+        "sys": 183350900,
+        "idle": 4767567900,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+        "speed": 3410,
+        "user": 716317600,
+        "nice": 474900,
+        "sys": 175971100,
+        "idle": 4752510900,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "enp2s0",
+        "internal": false,
+        "mac": "50:9a:4c:b6:a4:04",
+        "address": "192.168.1.108",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "wlp3s0",
+        "internal": false,
+        "mac": "7c:67:a2:ee:75:4b",
+        "address": "192.168.1.107",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "enp2s0",
+        "internal": false,
+        "mac": "50:9a:4c:b6:a4:04",
+        "address": "fe80::1df8:2420:ddb7:90c2",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      },
+      {
+        "name": "wlp3s0",
+        "internal": false,
+        "mac": "7c:67:a2:ee:75:4b",
+        "address": "fe80::a4ad:d543:1af4:36a7",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 3
+      }
+    ],
+    "host": "luna"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000bcff25",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [node]"
+    },
+    {
+      "pc": "0x0000000000a9f4fc",
+      "symbol": "node::OnFatalError(char const*, char const*) [node]"
+    },
+    {
+      "pc": "0x0000000000c06ffe",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000c07379",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]"
+    },
+    {
+      "pc": "0x0000000000db55f5",
+      "symbol": " [node]"
+    },
+    {
+      "pc": "0x0000000000db5c86",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [node]"
+    },
+    {
+      "pc": "0x0000000000dc44f9",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000dc5335",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]"
+    },
+    {
+      "pc": "0x0000000000dc7e0c",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]"
+    },
+    {
+      "pc": "0x0000000000d8e9e4",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [node]"
+    },
+    {
+      "pc": "0x00000000010dbd3e",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node]"
+    },
+    {
+      "pc": "0x000000000145c3d9",
+      "symbol": " [node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2154127360,
+    "totalCommittedMemory": 2150714440,
+    "usedMemory": 2140315936,
+    "availableMemory": 47804776,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 33328,
+        "capacity": 33040,
+        "used": 33040,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 4194304,
+        "committedMemory": 1292856,
+        "capacity": 2094848,
+        "used": 264528,
+        "available": 1830320
+      },
+      "old_space": {
+        "memorySize": 1958354944,
+        "committedMemory": 1958287808,
+        "capacity": 1951390416,
+        "used": 1951198744,
+        "available": 191672
+      },
+      "code_space": {
+        "memorySize": 2527232,
+        "committedMemory": 2315392,
+        "capacity": 2144448,
+        "used": 2144448,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 3149824,
+        "committedMemory": 3146144,
+        "capacity": 2389200,
+        "used": 2389200,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 185016320,
+        "committedMemory": 185016320,
+        "capacity": 183741432,
+        "used": 183741432,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 544544,
+        "used": 544544,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 2094848,
+        "used": 0,
+        "available": 2094848
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 120.999,
+    "kernelCpuSeconds": 3.37271,
+    "cpuConsumptionPercent": 207.287,
+    "maxRss": 2244665344,
+    "pageFaults": {
+      "IORequired": 272,
+      "IONotRequired": 706668
+    },
+    "fsActivity": {
+      "reads": 273096,
+      "writes": 48
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 52.0004,
+    "kernelCpuSeconds": 1.88606,
+    "cpuConsumptionPercent": 89.8107,
+    "fsActivity": {
+      "reads": 264912,
+      "writes": 32
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "XDG_SEAT": "seat0",
+    "XDG_SESSION_ID": "2",
+    "LC_IDENTIFICATION": "nl_NL.UTF-8",
+    "WINDOWPATH": "2",
+    "MANPATH": "/home/emil/.nvm/versions/node/v13.6.0/share/man:/home/linuxbrew/.linuxbrew/share/man:",
+    "DISPLAY": ":0",
+    "GJS_DEBUG_TOPICS": "JS ERROR;JS LOG",
+    "S_COLORS": "auto",
+    "COLORTERM": "truecolor",
+    "GNOME_TERMINAL_SERVICE": ":1.96",
+    "GNOME_DESKTOP_SESSION_ID": "this-is-deprecated",
+    "AWS_REGION": "eu-central-1",
+    "DEFAULTS_PATH": "/usr/share/gconf/ubuntu.default.path",
+    "LOGNAME": "emil",
+    "TEXTDOMAIN": "im-config",
+    "LC_TIME": "nl_NL.UTF-8",
+    "SHELL": "/usr/bin/zsh",
+    "PATH": "/home/emil/.nvm/versions/node/v13.6.0/bin:/home/emil/.deno/bin:/home/emil/.local/bin:./local/bin:/home/emil/.cargo/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/emil/.local/bin:/home/emil/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/emil/.dotnet/tools:/usr/local/go/bin:/usr/local/go/bin",
+    "LC_NUMERIC": "nl_NL.UTF-8",
+    "LC_PAPER": "nl_NL.UTF-8",
+    "IM_CONFIG_PHASE": "2",
+    "TEXTDOMAINDIR": "/usr/share/locale/",
+    "CLUTTER_IM_MODULE": "xim",
+    "QT4_IM_MODULE": "xim",
+    "XMODIFIERS": "@im=ibus",
+    "XDG_MENU_PREFIX": "gnome-",
+    "GNOME_SHELL_SESSION_MODE": "ubuntu",
+    "XAUTHORITY": "/run/user/1000/gdm/Xauthority",
+    "XDG_SESSION_DESKTOP": "ubuntu",
+    "GDMSESSION": "ubuntu",
+    "QT_IM_MODULE": "ibus",
+    "SSH_AUTH_SOCK": "/run/user/1000/keyring/ssh",
+    "LC_MEASUREMENT": "nl_NL.UTF-8",
+    "LC_ADDRESS": "nl_NL.UTF-8",
+    "HOMEBREW_PREFIX": "/home/linuxbrew/.linuxbrew",
+    "XDG_CONFIG_DIRS": "/etc/xdg/xdg-ubuntu:/etc/xdg",
+    "MANDATORY_PATH": "/usr/share/gconf/ubuntu.mandatory.path",
+    "POSTGRESS_DB": "udagrammicro",
+    "USERNAME": "emil",
+    "DESKTOP_SESSION": "ubuntu",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "POSTGRESS_PASSWORD": "udagrammicro",
+    "GTK_IM_MODULE": "ibus",
+    "GTK_MODULES": "gail:atk-bridge",
+    "POSTGRESS_HOST": "udagrammicro.c7nipamuot2q.eu-central-1.rds.amazonaws.com",
+    "PWD": "/home/emil/learning/udacity/serverless-project/backend",
+    "USER": "emil",
+    "VTE_VERSION": "5202",
+    "LC_MONETARY": "nl_NL.UTF-8",
+    "HOME": "/home/emil",
+    "QT_ACCESSIBILITY": "1",
+    "HOMEBREW_REPOSITORY": "/home/linuxbrew/.linuxbrew/Homebrew",
+    "SSH_AGENT_PID": "2730",
+    "XDG_DATA_DIRS": "/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop",
+    "LANG": "en_US.UTF-8",
+    "LC_NAME": "nl_NL.UTF-8",
+    "GNOME_TERMINAL_SCREEN": "/org/gnome/Terminal/screen/407f2bdd_ad2f_4db6_abba_60bd8d304085",
+    "GPG_AGENT_INFO": "/run/user/1000/gnupg/S.gpg-agent:0:1",
+    "SHLVL": "1",
+    "INFOPATH": "/home/linuxbrew/.linuxbrew/share/info",
+    "POSTGRESS_USERNAME": "udagrammicro",
+    "XDG_VTNR": "2",
+    "GJS_DEBUG_OUTPUT": "stderr",
+    "TERM": "xterm-256color",
+    "XDG_SESSION_TYPE": "x11",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "HOMEBREW_CELLAR": "/home/linuxbrew/.linuxbrew/Cellar",
+    "SESSION_MANAGER": "local/luna:@/tmp/.ICE-unix/2496,unix/luna:/tmp/.ICE-unix/2496",
+    "XDG_CURRENT_DESKTOP": "ubuntu:GNOME",
+    "LC_TELEPHONE": "nl_NL.UTF-8",
+    "OLDPWD": "/home/emil/learning/udacity/serverless-project",
+    "NVM_DIR": "/home/emil/.nvm",
+    "NVM_CD_FLAGS": "-q",
+    "NVM_BIN": "/home/emil/.nvm/versions/node/v13.6.0/bin",
+    "ZSH": "/home/emil/.oh-my-zsh",
+    "PAGER": "less",
+    "LESS": "-R",
+    "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "AWS_PROFILE": "udagram-microservices",
+    "AWS_BUCKET": "http://udagram-microservices.s3-website.eu-central-1.amazonaws.com",
+    "JWT_SECRET": "hello",
+    "URL": "http://localhost:8100",
+    "S3_SIGN_URL_ACCESS": "AKIA3TBUXSY3IVZVA5UJ",
+    "S3_SIGN_URL_SECRET": "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",
+    "_": "/home/emil/.nvm/versions/node/v13.6.0/bin/sls"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 16777216,
+      "hard": 16777216
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 4096,
+      "hard": 4096
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 62449,
+      "hard": 62449
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/lib/x86_64-linux-gnu/libnss_files.so.2",
+    "/lib/x86_64-linux-gnu/libnss_mdns4_minimal.so.2",
+    "/lib/x86_64-linux-gnu/libnss_dns.so.2",
+    "/lib/x86_64-linux-gnu/libresolv.so.2"
+  ]
+}
